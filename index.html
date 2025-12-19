@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ganesh Marachu | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#000;color:#fff;overflow-x:hidden}
+
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+/* CURSOR */
+.cursor{width:18px;height:18px;border-radius:50%;background:#22d3ee;position:fixed;pointer-events:none;box-shadow:0 0 25px #22d3ee;transform:translate(-50%,-50%)}
+
+/* NAVBAR */
+nav{position:fixed;top:0;width:100%;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);z-index:100}
+nav h3{color:#22d3ee}
+nav ul{display:flex;gap:25px;list-style:none}
+nav ul li a{color:#fff;text-decoration:none;font-weight:500}
+.menu{display:none;font-size:1.8rem;cursor:pointer}
+
+@media(max-width:768px){
+  nav ul{position:absolute;top:65px;right:0;background:#020617;width:100%;flex-direction:column;display:none}
+  nav ul.show{display:flex}
+  .menu{display:block}
+}
+
+section{padding:120px 8%}
+h1,h2{font-weight:800}
+h2{font-size:3rem;margin-bottom:40px}
+
+.reveal{opacity:0;transform:translateY(60px);transition:1s}
+.reveal.active{opacity:1;transform:none}
+
+/* HERO */
+.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero h1{font-size:4.5rem}
+.hero span{color:#22d3ee}
+.hero p{margin-top:20px;font-size:1.5rem;color:#cbd5f5}
+
+.socials{margin-top:30px;display:flex;gap:25px}
+.socials a{padding:14px 18px;border-radius:50%;background:rgba(255,255,255,0.06);transition:.3s}
+.socials a:hover{background:#22d3ee;color:#000;transform:scale(1.2)}
+
+.btn{margin-top:35px;padding:14px 34px;border-radius:40px;background:#22d3ee;color:#000;font-weight:600;text-decoration:none;transition:.3s}
+.btn:hover{transform:scale(1.1)}
+
+/* ABOUT */
+.about p{max-width:850px;font-size:1.2rem;line-height:1.8;color:#e5e7eb}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.skill-card{padding:30px;border-radius:24px;background:#020617;box-shadow:0 0 60px rgba(34,211,238,.15);transition:.4s}
+.skill-card:hover{transform:translateY(-10px) scale(1.05)}
+.skill-card h3{color:#22d3ee;margin-bottom:15px}
+
+/* PROJECTS + 3D TILT */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px}
+.project-card{padding:35px;border-radius:30px;background:#020617;transition:.2s;transform-style:preserve-3d}
+.project-card h3{color:#22d3ee;margin-bottom:10px}
+.project-card p{color:#cbd5f5}
+.project-card a{color:#22d3ee;text-decoration:none}
+
+footer{text-align:center;padding:40px;color:#94a3b8}
+/* SCROLL PROGRESS */
+#progress{position:fixed;top:0;left:0;height:4px;background:#22d3ee;z-index:200;width:0}
+
+/* SCROLL SNAP */
+html{scroll-behavior:smooth}
+.snap{scroll-snap-align:start}
+
+/* TIMELINE */
+.timeline{position:relative;max-width:900px;margin:auto}
+.timeline::before{content:'';position:absolute;left:50%;top:0;width:4px;height:100%;background:#22d3ee;transform:translateX(-50%)}
+.timeline-item{padding:30px 40px;width:50%}
+.timeline-item.left{left:0;position:relative;text-align:right}
+.timeline-item.right{left:50%;position:relative}
+.timeline-item h3{color:#22d3ee}
+
+/* CERTIFICATES */
+.certs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.cert-card{padding:30px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);box-shadow:0 0 40px rgba(34,211,238,.2)}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<canvas id="bg"></canvas>
+<div class="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <h3>Ganesh</h3>
+  <div class="menu">☰</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#timeline">Education</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero reveal">
+<h1>Ganesh <span>Marachu</span></h1>
+<p id="typing"></p>
+<div class="socials">
+  <a href="mailto:ganeshmarachu@gmail.com">✉</a>
+  <a href="https://github.com/GaneshMarachu" target="_blank">Git</a>
+  <a href="https://www.linkedin.com/in/marachu-ganesh-752539314/" target="_blank">In</a>
+</div>
+<a href="resume.pdf" download class="btn">Download Resume</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+<h2>About Me</h2>
+<p>I am a highly motivated B.Tech ECE student with a strong foundation in web development and cybersecurity. I focus on building secure applications and learning through real-world projects.</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="reveal snap">
+<h2>Skills</h2>
+<div class="skills-grid">
+<div class="skill-card"><h3>Frontend</h3><p>HTML, CSS, JavaScript</p></div>
+<div class="skill-card"><h3>Programming</h3><p>Python, C, SQL</p></div>
+<div class="skill-card"><h3>Cybersecurity</h3><p>OWASP Top 10, Burp Suite</p></div>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal snap">
+<h2>Projects</h2>
+<div class="projects-grid">
+
+  <div class="project-card">
+    <h3>Amazon Clone</h3>
+    <p>
+      A responsive single-page replica of the Amazon homepage built using pure HTML and CSS.
+      This project focuses on layout structuring, flexbox, grid systems, and UI accuracy.
+      JavaScript was intentionally not used as it was developed during the early learning phase.
+    </p>
+    <a href="https://github.com/GaneshMarachu/amazon-clone" target="_blank">View on GitHub</a>
+  </div>
+
+  <div class="project-card">
+    <h3>Spotify Clone</h3>
+    <p>
+      A visually accurate single-page clone of the Spotify web interface created using HTML and CSS.
+      Emphasis was placed on design precision, typography, and responsiveness.
+      JavaScript functionality was not included as this project was built before learning JS.
+    </p>
+    <a href="https://github.com/GaneshMarachu/spotify-clone" target="_blank">View on GitHub</a>
+  </div>
+
+  <div class="project-card">
+    <h3>SQL Complex Query Project</h3>
+    <p>
+      A database-focused project involving complex SQL queries such as joins, subqueries,
+      aggregations, and constraints to solve real-world data problems efficiently.
+    </p>
+    <a href="https://github.com/GaneshMarachu/sql-project" target="_blank">View on GitHub</a>
+  </div>
+
+  <div class="project-card">
+    <h3>Cybersecurity Lab Projects</h3>
+    <p>
+      Hands-on cybersecurity projects,
+      web application testing, and security analysis using tools  
+      and manual testing techniques.
+    </p>
+    <a href="https://github.com/GaneshMarachu/cybersecurity-projects" target="_blank">View on GitHub</a>
+  </div>
+
+</div>
+
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="reveal snap">
+<h2>Education</h2>
+<div class="timeline">
+<div class="timeline-item left"><h3>B.Tech ECE</h3><p>RVR & JC College of Engineering (2022–2026)</p></div>
+<div class="timeline-item right"><h3>Intermediate</h3><p>Narayana Junior College (2020–2022)</p></div>
+<div class="timeline-item left"><h3>SSC</h3><p>Narayana EM School (2020)</p></div>
+</div>
+</section>
+
+<!-- CERTIFICATES -->
+<section  id="certs" class="reveal snap">
+<h2>Certifications</h2>
+<div class="certs">
+<div class="cert-card">NPTEL – Cyber Security & Privacy</div>
+<div class="cert-card">Cisco – Python Essentials</div>
+<div class="cert-card">NPTEL – IoT</div>
+<div class="cert-card">Cisco – Introduction to Cybersecurity</div>
+</div>
+</section>
+
+<footer>© 2025 Ganesh Marachu</footer>
+
+<script>
+/* NAV */
+document.querySelector('.menu').onclick=()=>document.querySelector('nav ul').classList.toggle('show');
+
+/* REVEAL */
+const reveals=document.querySelectorAll('.reveal');
+window.addEventListener('scroll',()=>{
+  const doc=document.documentElement;
+  document.getElementById('progress').style.width=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100+'%';
+  const t=window.innerHeight*0.85;
+  reveals.forEach(r=>{if(r.getBoundingClientRect().top<t)r.classList.add('active')});
+});
+window.dispatchEvent(new Event('scroll'));
+
+/* TYPING */
+const text="Web Developer • Cybersecurity Enthusiast • B.Tech ECE";let i=0;
+setInterval(()=>{document.getElementById('typing').innerText=text.slice(0,i++);if(i>text.length)i=0},120);
+
+/* CURSOR */
+const cursor=document.querySelector('.cursor');
+window.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+
+/* PARTICLES */
+const c=document.getElementById('bg'),ctx=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+let parts=[...Array(80)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5),vy:(Math.random()-.5)}));
+function animate(){ctx.clearRect(0,0,c.width,c.height);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;ctx.fillStyle='#22d3ee';ctx.fillRect(p.x,p.y,2,2)});requestAnimationFrame(animate)}animate();
+
+
+/* 3D TILT */
+document.addEventListener('mousemove',e=>{
+  document.querySelectorAll('.project-card').forEach(card=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left-r.width/2;
+    const y=e.clientY-r.top-r.height/2;
+    card.style.transform=`rotateX(${(-y/20)}deg) rotateY(${(x/20)}deg)`;
+    card.onmouseleave=()=>card.style.transform='rotateX(0) rotateY(0)';
+  });
+});
+</script>
+</body>
+</html>
